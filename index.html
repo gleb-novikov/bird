@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>Bird</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+</head>
+<style>
+    .mindar-ui-scanning .scanning .inner .scanline {
+        display: none;
+    }
+    .mindar-ui-loading .loader {
+        border-width: 0px;
+        border-top-width: 4px;
+    }
+</style>
+<body>
+<a-scene mindar-image="imageTargetSrc: targets.mind;" color-space="sRGB" vr-mode-ui="enabled: false"
+         renderer="colorManagement: true, physicallyCorrectLights" device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+        <img id="background" src="background.png" />
+        <img id="logo" src="logo.png" />
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
+              raycaster="far: ${customFields.libVersion}; objects: .clickable"></a-camera>
+
+    <a-entity id="image-target" mindar-image-target="targetIndex: 0">
+
+        <a-image src="#background" position="0 0 0" width="1" height="0.8" opacity="0.95"></a-image>
+
+        <a-image id="button-logo" class="clickable" src="#logo" position="0 -0.4 0.01" width="0.1" height="0.1"
+                 animation="property: width; to: 0.11; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate"
+                 animation__2="property: height; to: 0.11; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
+        </a-image>
+
+    </a-entity>
+
+</a-scene>
+
+<script>
+    const buttonLogo = document.querySelector('#button-logo');
+
+    buttonLogo.addEventListener("click", event => {
+        window.open('https://t.me/itmoict', '_blank');
+    });
+</script>
+</body>
+</html>
